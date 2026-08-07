@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Aurora Prism Enterprise Tokens ─── */
+:root {
+  --bg: #F2F5FD;
+  --surface: #FFFFFF;
+  --raised: #EAEef8;
+  --border: #D5DBed;
+  --text: #090C14;
+  --text-muted: #52607F;
+  --plasma: #3B74E8;
+  --aurora: #28B8AE;
+  --plasma-soft: rgba(59,116,232,0.08);
+  --aurora-soft: rgba(40,184,174,0.08);
+  --sidebar-w: 240px;
+  --header-h: 64px;
+  --radius: 8px;
+}
+
+[data-theme='dark'] {
+  --bg: #090C14;
+  --surface: #111520;
+  --raised: #181E2E;
+  --border: #1F2840;
+  --text: #DDE4F5;
+  --text-muted: #6B7594;
+  --plasma: #4F8EF7;
+  --aurora: #36C9BE;
+  --plasma-soft: rgba(79,142,247,0.12);
+  --aurora-soft: rgba(54,201,190,0.10);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #090C14;
+    --surface: #111520;
+    --raised: #181E2E;
+    --border: #1F2840;
+    --text: #DDE4F5;
+    --text-muted: #6B7594;
+    --plasma: #4F8EF7;
+    --aurora: #36C9BE;
+    --plasma-soft: rgba(79,142,247,0.12);
+    --aurora-soft: rgba(54,201,190,0.10);
+  }
+}
+
+/* ─── Base ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Inter, 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ─── Selection ─── */
+::selection { background: var(--plasma-soft); color: var(--plasma); }
+
+/* ─── Focus ─── */
+:focus-visible {
+  outline: 2px solid var(--plasma);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* ─── Component layer ─── */
+@layer components {
+  .field-label {
+    @apply block text-xs font-semibold uppercase tracking-wide text-[color:var(--text-muted)];
+  }
+}
+
+/* ─── Utility classes ─── */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+
+  .bg-surface   { background-color: var(--surface); }
+  .bg-raised    { background-color: var(--raised); }
+  .border-wire  { border-color: var(--border); }
+  .text-primary { color: var(--text); }
+  .text-muted   { color: var(--text-muted); }
+
+  .plasma-glow  { box-shadow: 0 0 24px rgba(79,142,247,0.20); }
+  .aurora-glow  { box-shadow: 0 0 24px rgba(54,201,190,0.16); }
+}
+
+/* ─── Page transition wrapper ─── */
+.page-enter {
+  animation: pageEnter 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Status chip colors ─── */
+.status-present   { background: rgba(34,197,94,0.12);  color: #22c55e; }
+.status-absent    { background: rgba(239,68,68,0.12);   color: #ef4444; }
+.status-late      { background: rgba(245,158,11,0.12);  color: #f59e0b; }
+.status-on-leave  { background: rgba(139,92,246,0.12);  color: #8b5cf6; }
+.status-remote    { background: rgba(6,182,212,0.12);   color: #06b6d4; }
+.status-half-day  { background: rgba(249,115,22,0.12);  color: #f97316; }
+
+.priority-low      { background: rgba(34,197,94,0.12);  color: #22c55e; }
+.priority-medium   { background: rgba(245,158,11,0.12);  color: #f59e0b; }
+.priority-high     { background: rgba(239,68,68,0.12);   color: #ef4444; }
+.priority-critical { background: rgba(220,38,38,0.15);   color: #dc2626; }
+
+.leave-pending   { background: rgba(245,158,11,0.12); color: #f59e0b; }
+.leave-approved  { background: rgba(34,197,94,0.12);  color: #22c55e; }
+.leave-rejected  { background: rgba(239,68,68,0.12);  color: #ef4444; }
+.leave-cancelled { background: rgba(107,117,148,0.12); color: #6b7594; }
