@@ -39,13 +39,13 @@ export default function PayslipDetail() {
         className="rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden">
         {/* Header */}
         <div className="bg-[var(--plasma)] p-6 text-white">
-          <div className="flex items-start justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
             <div>
               <p className="text-sm font-semibold opacity-80">CyberSynap Technologies</p>
               <p className="text-2xl font-bold mt-1">{monthLabel(payslip.month)}</p>
               <p className="text-sm opacity-70 mt-1">Pay Slip</p>
             </div>
-            <div className="text-right">
+            <div className="sm:text-right">
               <p className="text-sm opacity-70">Net Salary</p>
               <p className="text-3xl font-bold tabular-nums">{formatCurrency(payslip.netSalary)}</p>
             </div>

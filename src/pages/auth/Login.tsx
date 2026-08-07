@@ -108,8 +108,8 @@ export default function Login() {
           className="w-full max-w-sm"
         >
           {/* Mobile logo */}
-          <div className="flex items-center gap-2 mb-8 lg:hidden">
-            <img src="/cyber_synap_logo.png" alt="CyberSynap" className="h-8 w-auto object-contain" />
+          <div className="mb-8 lg:hidden w-fit rounded-2xl overflow-hidden bg-white p-3">
+            <img src="/cyber_synap_logo.png" alt="CyberSynap" className="h-8 w-auto object-contain block" />
           </div>
 
           <h1 className="text-2xl font-bold text-[var(--text)] mb-1">Sign in</h1>

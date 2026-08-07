@@ -44,9 +44,9 @@ const columns: ColumnDef<AttendanceRecord>[] = [
   { accessorKey: 'date',      header: 'Date',       cell: ({ getValue }) => fmtDate(getValue() as string) },
   { accessorKey: 'status',    header: 'Status',     cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
   { accessorKey: 'checkIn',   header: 'Check In',   cell: ({ getValue }) => getValue() ? fmtTime(getValue() as string) : '—', enableSorting: false },
-  { accessorKey: 'checkOut',  header: 'Check Out',  cell: ({ getValue }) => getValue() ? fmtTime(getValue() as string) : '—', enableSorting: false },
-  { accessorKey: 'workHours', header: 'Hours',      cell: ({ getValue }) => getValue() ? formatHours(getValue() as number) : '—' },
-  { accessorKey: 'note',      header: 'Note',       cell: ({ getValue }) => getValue() || '—', enableSorting: false },
+  { accessorKey: 'checkOut',  header: 'Check Out',  cell: ({ getValue }) => getValue() ? fmtTime(getValue() as string) : '—', enableSorting: false, meta: { mobileHide: true } },
+  { accessorKey: 'workHours', header: 'Hours',      cell: ({ getValue }) => getValue() ? formatHours(getValue() as number) : '—', meta: { mobileHide: true } },
+  { accessorKey: 'note',      header: 'Note',       cell: ({ getValue }) => getValue() || '—', enableSorting: false, meta: { mobileHide: true } },
 ];
 
 /* ── Modal wrapper ── */
@@ -352,12 +352,18 @@ export default function Attendance() {
 
         {/* Recent sessions table */}
         <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-2">Recent Sessions</p>
-        <div className="rounded-lg border border-[var(--border)] overflow-hidden">
+        <div className="rounded-lg border border-[var(--border)] overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[var(--border)] bg-[var(--raised)]">
-                {['Date','Login Time','Logout Time','Duration','Status'].map(h => (
-                  <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wide">{h}</th>
+                {[
+                  { label: 'Date', hide: false },
+                  { label: 'Login Time', hide: false },
+                  { label: 'Logout Time', hide: false },
+                  { label: 'Duration', hide: true },
+                  { label: 'Status', hide: false },
+                ].map(({ label, hide }) => (
+                  <th key={label} className={`text-left px-4 py-2.5 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wide${hide ? ' hidden sm:table-cell' : ''}`}>{label}</th>
                 ))}
               </tr>
             </thead>
@@ -369,7 +375,7 @@ export default function Attendance() {
                   <td className="px-4 py-2.5 text-[var(--text-muted)]">{dayLabel(s.loginAt)}</td>
                   <td className="px-4 py-2.5 font-mono text-[var(--text)]">{fmt(s.loginAt)}</td>
                   <td className="px-4 py-2.5 font-mono text-[var(--text)]">{s.logoutAt ? fmt(s.logoutAt) : '—'}</td>
-                  <td className="px-4 py-2.5 text-[var(--text)]">{fmtDur(s.durationMins)}</td>
+                  <td className="px-4 py-2.5 text-[var(--text)] hidden sm:table-cell">{fmtDur(s.durationMins)}</td>
                   <td className="px-4 py-2.5">
                     {s.logoutAt
                       ? <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[var(--raised)] text-[var(--text-muted)] border border-[var(--border)]">Completed</span>
@@ -383,7 +389,7 @@ export default function Attendance() {
       </motion.div>
 
       {/* ── Stats ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         <StatCard label="Present"   value={present}               icon={<CheckCircle2 size={16}/>} accent="green"  delay={0} />
         <StatCard label="Absent"    value={absent}                icon={<XCircle size={16}/>}      accent="red"    delay={0.05} />
         <StatCard label="Late"      value={late}                  icon={<AlertCircle size={16}/>}  accent="amber"  delay={0.1} />
@@ -413,7 +419,7 @@ export default function Attendance() {
               ))}
             </select>
           </Field>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Field label="Check In Time">
               <input type="time" value={attForm.checkIn}
                 onChange={e => setAttForm(f => ({ ...f, checkIn: e.target.value }))}
@@ -451,7 +457,7 @@ export default function Attendance() {
               onChange={e => setSessForm(f => ({ ...f, date: e.target.value }))}
               className={inputCls} />
           </Field>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Field label="Login Time">
               <input type="time" value={sessForm.loginTime}
                 onChange={e => setSessForm(f => ({ ...f, loginTime: e.target.value }))}

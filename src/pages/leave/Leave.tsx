@@ -29,9 +29,9 @@ export default function Leave() {
   const columns: ColumnDef<LeaveRequest>[] = [
     { accessorKey: 'type',      header: 'Type',       cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
     { accessorKey: 'startDate', header: 'From',       cell: ({ getValue }) => fmtDate(getValue() as string) },
-    { accessorKey: 'endDate',   header: 'To',         cell: ({ getValue }) => fmtDate(getValue() as string) },
+    { accessorKey: 'endDate',   header: 'To',         cell: ({ getValue }) => fmtDate(getValue() as string), meta: { mobileHide: true } },
     { accessorKey: 'days',      header: 'Days',       cell: ({ getValue }) => `${getValue()} day(s)` },
-    { accessorKey: 'reason',    header: 'Reason',     cell: ({ getValue }) => <span className="text-xs text-[var(--text-muted)]">{getValue() as string}</span> },
+    { accessorKey: 'reason',    header: 'Reason',     cell: ({ getValue }) => <span className="text-xs text-[var(--text-muted)]">{getValue() as string}</span>, meta: { mobileHide: true } },
     { accessorKey: 'status',    header: 'Status',     cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
     {
       id: 'actions', header: '',

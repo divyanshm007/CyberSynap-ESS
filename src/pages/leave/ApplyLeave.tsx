@@ -50,7 +50,7 @@ export default function ApplyLeave() {
     <div className="max-w-xl">
       <PageHeader title="Apply for Leave" subtitle="Submit a new leave request for approval." />
       <motion.form initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-        onSubmit={handleSubmit} className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6 space-y-4">
+        onSubmit={handleSubmit} className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-6 space-y-4">
         <div>
           <label className="field-label">Leave Type</label>
           <select value={form.type} onChange={e => set('type', e.target.value)}
@@ -58,7 +58,7 @@ export default function ApplyLeave() {
             {LEAVE_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
           </select>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label className="field-label">From</label>
             <input type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)}

@@ -34,7 +34,7 @@ export default function TicketDetail() {
         <ArrowLeft size={14}/> Back to Tickets
       </button>
       <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
-        <div className="flex items-start justify-between gap-3 mb-4">
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
           <div>
             <p className="text-xs font-mono text-[var(--plasma)] mb-1">{ticket.ticketNumber}</p>
             <h2 className="text-base font-semibold text-[var(--text)]">{ticket.subject}</h2>

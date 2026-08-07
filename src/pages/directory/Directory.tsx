@@ -66,7 +66,7 @@ export default function Directory() {
             </div>
           </motion.div>
         ))}
-        {!filtered.length && <div className="col-span-4 text-center py-12 text-sm text-[var(--text-muted)]">No employees found.</div>}
+        {!filtered.length && <div className="col-span-full text-center py-12 text-sm text-[var(--text-muted)]">No employees found.</div>}
       </div>
     </div>
   );

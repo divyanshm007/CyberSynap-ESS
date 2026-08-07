@@ -16,7 +16,7 @@ const columns: ColumnDef<TimesheetEntry>[] = [
   { accessorKey: 'project',     header: 'Project'  },
   { accessorKey: 'task',        header: 'Task'     },
   { accessorKey: 'hours',       header: 'Hours',   cell: ({ getValue }) => formatHours(getValue() as number) },
-  { accessorKey: 'description', header: 'Notes',   cell: ({ getValue }) => <span className="text-xs text-[var(--text-muted)] line-clamp-1">{getValue() as string}</span> },
+  { accessorKey: 'description', header: 'Notes',   cell: ({ getValue }) => <span className="text-xs text-[var(--text-muted)] line-clamp-1">{getValue() as string}</span>, meta: { mobileHide: true } },
   { accessorKey: 'status',      header: 'Status',  cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
 ];
 
@@ -44,7 +44,7 @@ export default function Timesheets() {
           </div>
         }
       />
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <StatCard label="Total Logged"   value={formatHours(totalHrs)}    icon={<Timer size={16}/>} accent="plasma" delay={0}    />
         <StatCard label="Approved"       value={formatHours(approvedHrs)} icon={<Timer size={16}/>} accent="green"  delay={0.05} />
         <StatCard label="Pending Review" value={formatHours(pendingHrs)}  icon={<Timer size={16}/>} accent="amber"  delay={0.1}  />

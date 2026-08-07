@@ -10,7 +10,7 @@ interface Props {
 
 export default function PageHeader({ title, subtitle, actions, className }: Props) {
   return (
-    <div className={cn('flex items-start justify-between gap-4 mb-6', className)}>
+    <div className={cn('flex flex-wrap items-start justify-between gap-3 mb-6', className)}>
       <div>
         <h1 className="text-xl font-semibold text-[var(--text)] text-balance">{title}</h1>
         {subtitle && <p className="mt-1 text-sm text-[var(--text-muted)]">{subtitle}</p>}

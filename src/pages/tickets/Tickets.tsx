@@ -23,14 +23,14 @@ export default function Tickets() {
   const resolved   = tickets.filter(t => t.status === 'resolved').length;
 
   const columns: ColumnDef<Ticket>[] = [
-    { accessorKey: 'ticketNumber', header: 'Ticket #', cell: ({ getValue }) =>
+    { accessorKey: 'ticketNumber', header: 'Ticket #', meta: { mobileHide: true }, cell: ({ getValue }) =>
         <span className="font-mono text-xs text-[var(--plasma)]">{getValue() as string}</span> },
     { accessorKey: 'subject',  header: 'Subject',  cell: ({ getValue }) =>
         <span className="text-sm font-medium text-[var(--text)] line-clamp-1">{getValue() as string}</span> },
-    { accessorKey: 'category', header: 'Category', cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
+    { accessorKey: 'category', header: 'Category', meta: { mobileHide: true }, cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
     { accessorKey: 'priority', header: 'Priority', cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
     { accessorKey: 'status',   header: 'Status',   cell: ({ getValue }) => <StatusBadge variant={getValue() as string} size="sm" /> },
-    { accessorKey: 'createdAt',header: 'Raised',   cell: ({ getValue }) => <span className="text-xs text-[var(--text-muted)]">{timeAgo(getValue() as string)}</span> },
+    { accessorKey: 'createdAt',header: 'Raised',   meta: { mobileHide: true }, cell: ({ getValue }) => <span className="text-xs text-[var(--text-muted)]">{timeAgo(getValue() as string)}</span> },
     { id: 'actions', header: '', cell: ({ row }) =>
         <Link to={ROUTES.TICKET_DETAIL.replace(':id', row.original.id)} className="text-xs text-[var(--plasma)] hover:underline">View</Link> },
   ];
@@ -48,7 +48,7 @@ export default function Tickets() {
           </div>
         }
       />
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <StatCard label="Open"        value={open}       icon={null} accent="amber"  delay={0}    />
         <StatCard label="In Progress" value={inProgress} icon={null} accent="violet" delay={0.05} />
         <StatCard label="Resolved"    value={resolved}   icon={null} accent="green"  delay={0.1}  />
